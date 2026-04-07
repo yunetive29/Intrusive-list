@@ -12,8 +12,15 @@
 
 ## Тесты
 
-Сборка и запуск тестов из корня репозитория:
+Тесты используют [doctest](https://github.com/doctest/doctest). Удобнее всего поставить заголовки через Homebrew и собрать CMake:
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -I. test.cpp -o test_run && ./test_run
+brew install doctest
+cmake -B build -DCMAKE_PREFIX_PATH="$(brew --prefix doctest)"
+cmake --build build
+./build/test_run
+```
+
+```bash
+g++ -std=c++17 -Wall -Wextra -I"$(brew --prefix doctest)/include" -I. test.cpp -o test_run && ./test_run
 ```
